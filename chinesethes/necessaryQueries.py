@@ -23,5 +23,7 @@ def fetch_words():
     pinyin_list = map(lambda x: x.pinyin, words)
     eng_list = map(lambda x: x.english, words)
 
-    return (chi_list, pinyin_list, eng_list)
-    
+    #return (words, chi_list, pinyin_list, eng_list)
+    return words
+def make_lists(hugeList):
+    pass
