@@ -2,6 +2,7 @@ import os
 import jinja2
 import webapp2
 import logging
+import necessaryQueries
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -36,6 +37,7 @@ class EnterWordsHandler(webapp2.RequestHandler):
 
         template = jinja_environment.get_template('enter.html')
         self.response.write(template.render(template_values))
+        
     def post(self):
         chi = self.request.get("chi")
         pinyin = self.request.get("pinyin")
@@ -47,8 +49,27 @@ class EnterWordsHandler(webapp2.RequestHandler):
                     english = eng)
         word.put()
 
+        template_values = {'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
+
+        template = jinja_environment.get_template('enter.html')
+        self.response.write(template.render(template_values))
+
 class EditWordsHandler(webapp2.RequestHandler):
-    def get(self): 
+    def get(self):
+        user = users.get_current_user()
+
+        (chi_list, pinyin_list, eng_list) = necessaryQueries.fetch_words()
+        
+        template_values = {'user': user, 'chi_list': chi_list,
+                           'pinyin_list': pinyin_list, 'eng_list': eng_list,
+        'logout_url': users.create_logout_url('/')}
+        
+        template = jinja_environment.get_template('edit.html')
+        self.response.write(template.render(template_values))
+
+    def post(self):
+        #query for all instances
         template_values = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/')}
         
@@ -57,6 +78,13 @@ class EditWordsHandler(webapp2.RequestHandler):
 
 class WritingHandler(webapp2.RequestHandler):
     def get(self): 
+        template_values = {'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
+        
+        template = jinja_environment.get_template('write.html')
+        self.response.write(template.render(template_values))
+
+    def post(self):
         template_values = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/')}
         

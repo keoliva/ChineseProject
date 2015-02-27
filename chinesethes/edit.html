@@ -3,7 +3,7 @@
 	<head>
 	</head>
 	<body>
-	Welcome back {{ user.nickname }}!!! 
+	Welcome back {{ user.nickname }}!!!
 	<a href="{{ logout_url }}">Logout</a>
 	<ul id="menu">
 		<li><a href="/">HOME</a></li>
@@ -15,22 +15,26 @@
 			</ul></li>
 	</ul>
 	<div id="view_edit_entries">
-	<form action="/enter" method="POST" enctype="multipart/form-data">
+	<form action="/edit" method="POST" enctype="multipart/form-data">
+		ZHONGWEN
 		<div id="chinese_inputs">
 			{% for item in chi_list %}
-			<input type="text" name="chi{{ item.index }}" value="{{ item }}"">
+			<input type="text" name="chi{{ item.index }}" value="{{ item }}">
 			{% endfor %}
-		</div>
+		</div> <br>
+		PINYIN
 		<div id="pinyin_inputs">
 			{% for item in pinyin_list %}
-			<input type="text" name="pinyin{{ item.index }}" value="{{ item }}"">
+			<input type="text" name="pinyin{{ item.index }}" value="{{ item }}">
 			{% endfor %}
-		</div>
+		</div> <br>
+		ENGLISH
 		<div id="english_inputs">
 			{% for item in eng_list %}
-			<input type="text" name="eng{{ item.index }}" value="{{ item }}"">
+			<input type="text" name="eng{{ item.index }}" value="{{ item }}">
 			{% endfor %}
 		</div>
+		<input type="submit">
 	</form>
 	</div>
 </html>
