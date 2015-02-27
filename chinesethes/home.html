@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+	{% if user %}
+	Welcome back {{ user.nickname }}!! 
+	<a href="{{ logout_url }}">Logout</a>
+	{% else %}
+	Welcome! Please login to use the web application!!
+	<a href="{{ login_url }}">Login</a>
+	{% endif %}
+	
+	</body>
+</html>
