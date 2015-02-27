@@ -20,10 +20,7 @@ data.main_info = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/')}
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        if (data.main_info['user']):
-            self.redirect('/enter')
-        
+    def get(self): 
         template_values = {}
         template_values.update(data.main_info)
         
@@ -32,10 +29,6 @@ class MainHandler(webapp2.RequestHandler):
 
 class EnterWordsHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        login_url = users.create_login_url('/')
-        logout_url = users.create_logout_url('/')
-
         template_values = {}
         template_values.update(data.main_info)
 

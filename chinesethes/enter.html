@@ -5,10 +5,30 @@
 	<body>
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
+	<ul id="menu">
+		<li><a href="/">HOME</a></li>
+		<li><a href="/enter">CREATE</a></li>
+	</ul>
+	
+	<div id="enter_new">
 	<form action="/enter" method="POST" enctype="multipart/form-data">
 	<input type="text" placeholder="中文" name="chi"><br>
 	<input type="text" placeholder="pin1yin1" name="pinyin"><br>
 	<input type="text" placeholder="English" name="eng"><br>
 	<input type="submit">
 	</form>
+	</div>
+	
+	<div id="view_edit_entries">
+	<form action="/enter" method="POST" enctype="multipart/form-data">
+	
+	</form>
+	</div>
+	
+	<div id="create_text">
+	<form action="/enter" method="POST" enctype="multipart/form-data">
+	
+	</form>
+	
+	</div>
 </html>

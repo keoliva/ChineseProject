@@ -6,9 +6,14 @@
 	{% if user %}
 		Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
+	
+	<ul id="menu">
+		<li><a href="/">HOME</a></li>
+		<li><a href="/enter">CREATE</a></li>
+	</ul>
 	{% else %}
-	Welcome! Please login to use the web application!!
-	<a href="{{ login_url }}">Signup or Login</a>
+		Welcome! Please login to use the web application!!
+		<a href="{{ login_url }}">Signup or Login</a>
 	{% endif %}
 	<br>
 	<h1>About the web app...</h1>
