@@ -4,12 +4,13 @@
 	</head>
 	<body>
 	{% if user %}
-	Welcome back {{ user.nickname }}!! 
+		Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
 	{% else %}
 	Welcome! Please login to use the web application!!
-	<a href="{{ login_url }}">Login</a>
+	<a href="{{ login_url }}">Signup or Login</a>
 	{% endif %}
-	
+	<br>
+	<h1>About the web app...</h1>
 	</body>
 </html>
