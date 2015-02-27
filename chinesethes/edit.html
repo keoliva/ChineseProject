@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+	Welcome back {{ user.nickname }}!!! 
+	<a href="{{ logout_url }}">Logout</a>
+	<ul id="menu">
+		<li><a href="/">HOME</a></li>
+		<li><a href="/enter">CREATE</a>
+			<ul>
+				<li><a href="/enter">Enter New Entries</a></li>
+				<li><a href="/edit">View/Edit Entries</a></li>
+				<li><a href="/write">Write Essay</a></li>
+			</ul></li>
+	</ul>
+	<div id="view_edit_entries">
+	<form action="/enter" method="POST" enctype="multipart/form-data">
+		<div id="chinese_inputs">
+			{% for item in chi_list %}
+			<input type="text" name="chi{{ item.index }}" value="{{ item }}"">
+			{% endfor %}
+		</div>
+		<div id="pinyin_inputs">
+			{% for item in pinyin_list %}
+			<input type="text" name="pinyin{{ item.index }}" value="{{ item }}"">
+			{% endfor %}
+		</div>
+		<div id="english_inputs">
+			{% for item in eng_list %}
+			<input type="text" name="eng{{ item.index }}" value="{{ item }}"">
+			{% endfor %}
+		</div>
+	</form>
+	</div>
+</html>

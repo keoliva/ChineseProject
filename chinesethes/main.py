@@ -21,16 +21,18 @@ data.main_info = {'user': users.get_current_user(),
 
 class MainHandler(webapp2.RequestHandler):
     def get(self): 
-        template_values = {}
-        template_values.update(data.main_info)
+        template_values = {'user': users.get_current_user(),
+        'login_url': users.create_login_url('/enter'),
+        'logout_url': users.create_logout_url('/')}
+        #template_values.update(data.main_info)
         
         template = jinja_environment.get_template('home.html')
         self.response.write(template.render(template_values))
 
 class EnterWordsHandler(webapp2.RequestHandler):
     def get(self):
-        template_values = {}
-        template_values.update(data.main_info)
+        template_values = {'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
 
         template = jinja_environment.get_template('enter.html')
         self.response.write(template.render(template_values))
@@ -45,7 +47,25 @@ class EnterWordsHandler(webapp2.RequestHandler):
                     english = eng)
         word.put()
 
+class EditWordsHandler(webapp2.RequestHandler):
+    def get(self): 
+        template_values = {'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
+        
+        template = jinja_environment.get_template('edit.html')
+        self.response.write(template.render(template_values))
+
+class WritingHandler(webapp2.RequestHandler):
+    def get(self): 
+        template_values = {'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
+        
+        template = jinja_environment.get_template('write.html')
+        self.response.write(template.render(template_values))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/enter', EnterWordsHandler),
+    ('/edit', EditWordsHandler),
+    ('/write', WritingHandler),
 ], debug=True)
