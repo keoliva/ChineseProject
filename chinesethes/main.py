@@ -5,6 +5,12 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+class Word(ndb.Model):
+    user = ndb.UserProperty()
+    chinese = ndb.StringProperty()
+    pinyin = ndb.StringProperty()
+    english = ndb.StringProperty()
+
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)))
                                        
 class Struct(): pass
@@ -37,8 +43,14 @@ class EnterWordsHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
     def post(self):
         chi = self.request.get("chi")
-        eng = self.request.get("eng")
         pinyin = self.request.get("pinyin")
+        eng = self.request.get("eng")
+        
+        word = Word(user = users.get_current_user(),
+                    chinese = chi,
+                    pinyin = pinyin,
+                    english = eng)
+        word.put()
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
