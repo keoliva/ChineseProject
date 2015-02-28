@@ -1,4 +1,4 @@
-function find() {
+setInterval(function find() {
 	var text = document.getElementById("textarea").value;
 	var index = text.search("#");
 	if (index >= 0) {
@@ -9,4 +9,4 @@ function find() {
 	} else {
 		document.getElementById("demo").innerHTML = "dom";
 	}
-}
+}, 2000);

@@ -4,7 +4,7 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/static/js/find.js"></script>
 	</head>
-	<body>
+	<body onload="setInterval(find(), 3000)">
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
 	<ul id="menu">
@@ -20,10 +20,10 @@
 	<div id="create_text">
 	<p id="demo"></p>
 
-		<textarea id="textarea" name="textarea" rows="40" cols="50" 
+		<textarea id="textarea" name="textarea" rows="20" cols="100" 
 			 value="">
 		</textarea>
-		<input type="submit" onclick=find()>
+		<input type="submit">
 
 	</div>
 
