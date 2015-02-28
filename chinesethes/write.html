@@ -4,6 +4,13 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/write_style.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/static/js/find.js"></script>
+	<script>
+	$(function () {
+		$("#table td").mousedown(function () {
+			$("#demo").html("HELLO");
+		});
+	});
+	</script>
 	</head>
 	<body onload="find()">
 	Welcome back {{ user.nickname }}!!! 
@@ -20,6 +27,7 @@
 	<div>
 	<div id="create_text" style="float:left;">
 	<p id="demo"></p>
+	<p id="demo1"></p>
     <form action="/write" method="POST" enctype="multipart/form-data">
 		<textarea id="textarea" name="textarea" rows="20" cols="100" 
 			 value="">
@@ -31,19 +39,19 @@
 	<div class="scrollableArea">
 		<table>
 			<tr>
-				<td>已经</td>
-				<td>一直</td>		
-				<td>大雨</td>
+				<td><p>已经</p></td>
+				<td><p>一直</p></td>		
+				<td><p>大雨</p></td>
 			</tr>
 			<tr>
-				<td>名字</td>
-				<td>大风</td>		
-				<td>存在</td>
+				<td><p>名字</p></td>
+				<td><p>大风</p></td>		
+				<td><p>存在</p></td>
 			</tr>
 			<tr>
-				<td>越来越好</td>
-				<td>终于</td>		
-				<td>地道</td>
+				<td><p>越来越好</p></td>
+				<td><p>终于</p></td>		
+				<td><p>地道</p></td>
 			</tr>
 		</table>
 	</div>
