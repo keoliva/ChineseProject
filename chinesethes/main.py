@@ -49,11 +49,7 @@ class EnterWordsHandler(webapp2.RequestHandler):
                     english = eng)
         word.put()
 
-        template_values = {'user': users.get_current_user(),
-        'logout_url': users.create_logout_url('/')}
-
-        template = jinja_environment.get_template('enter.html')
-        self.response.write(template.render(template_values))
+        self.get()
 
 class EditWordsHandler(webapp2.RequestHandler):
     def get(self):
@@ -96,11 +92,10 @@ class WritingHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
     def post(self):
-        template_values = {'user': users.get_current_user(),
-        'logout_url': users.create_logout_url('/')}
-        
-        template = jinja_environment.get_template('write.html')
-        self.response.write(template.render(template_values))
+        text = self.request.get("textarea")
+        data.text = text
+
+        self.get()
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

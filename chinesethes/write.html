@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" type="text/css" href="/static/css/write_style.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/static/js/find.js"></script>
 	</head>
-	<body onload="setInterval(find(), 3000)">
+	<body onload="find()">
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
 	<ul id="menu">
@@ -16,16 +17,36 @@
 				<li><a href="/write">Write Essay</a></li>
 			</ul></li>
 	</ul>
-	
-	<div id="create_text">
+	<div>
+	<div id="create_text" style="float:left;">
 	<p id="demo"></p>
-
+    <form action="/write" method="POST" enctype="multipart/form-data">
 		<textarea id="textarea" name="textarea" rows="20" cols="100" 
 			 value="">
 		</textarea>
 		<input type="submit">
-
+	</form>
 	</div>
-
+	
+	<div class="scrollableArea">
+		<table>
+			<tr>
+				<td>已经</td>
+				<td>一直</td>		
+				<td>大雨</td>
+			</tr>
+			<tr>
+				<td>名字</td>
+				<td>大风</td>		
+				<td>存在</td>
+			</tr>
+			<tr>
+				<td>越来越好</td>
+				<td>终于</td>		
+				<td>地道</td>
+			</tr>
+		</table>
+	</div>
+	</div>
 	</body>
 </html>

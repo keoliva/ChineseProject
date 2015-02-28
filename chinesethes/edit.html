@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" type="text/css" href="/static/css/edit_style.css">
 	</head>
 	<body>
 	Welcome back {{ user.nickname }}!!!
@@ -16,24 +17,20 @@
 	</ul>
 	<div id="view_edit_entries">
 	<form action="/edit" method="POST" enctype="multipart/form-data">
-		ZHONGWEN
-		<div id="chinese_inputs">
-			{% for word in words %}
-			<input type= "text" name="chi{{ loop.index0 }}" value="{{ word.chinese }}">
-			{% endfor %}
-		</div> <br>
-		PINYIN
-		<div id="pinyin_inputs">
-			{% for word in words %}
-			<input type="text" name="pinyin{{ loop.index0 }}" value="{{ word.pinyin }}">
-			{% endfor %}
-		</div> <br>
-		ENGLISH
-		<div id="english_inputs">
-			{% for word in words %}
-			<input type="text" name="eng{{ loop.index0 }}" value="{{ word.english }}">
-			{% endfor %}
-		</div>
+		<table>
+		<tr>
+			<th>ZHONGWEN</th>
+			<th>PINYIN</th>
+			<th>ENGLISH</th>
+		</tr>
+		{% for word in words %}
+		<tr>
+			<td><input type= "text" name="chi{{ loop.index0 }}" value="{{ word.chinese }}"></td>
+			<td><input type="text" name="pinyin{{ loop.index0 }}" value="{{ word.pinyin }}"></td>
+			<td><input type="text" name="eng{{ loop.index0 }}" value="{{ word.english }}"></td>
+		</tr>
+		{% endfor %}
+		</table>
 		<input type="submit">
 	</form>
 	</div>

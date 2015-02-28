@@ -1,0 +1,22 @@
+tablej,th,td {
+	border-collapse:collapse;
+	border： 1px solid #dddddd;
+	padding:5px;
+	text-align:center;
+}
+table {
+	width:500px;
+	height:500px;
+}
+td {
+	width:33%;
+}
+tr:nth-child(odd) td:nth-child(odd){
+    background-color:#f5f5f5;
+}
+tr:nth-child(even) td:nth-child(even){
+    background-color:#f5f5f5;
+}
+.scrollableArea {
+	float:right
+}
