@@ -1,7 +1,0 @@
-from main.py import *
-
-
-def fetch_words():
-    user = users.get_current_user()
-    query = Word.query(Word.user == user)
-    

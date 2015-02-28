@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="/static/js/find.js"></script>
 	</head>
 	<body>
 	Welcome back {{ user.nickname }}!!! 
@@ -16,10 +18,13 @@
 	</ul>
 	
 	<div id="create_text">
-	<form action="/enter" method="POST" enctype="multipart/form-data">
-		<textarea name="textarea" rows="40" cols="50">
+	<p id="demo"></p>
+
+		<textarea id="textarea" name="textarea" rows="40" cols="50" 
+			 value="">
 		</textarea>
-	</form>
+		<input type="submit" onclick=find()>
+
 	</div>
 
 	</body>
