@@ -2,6 +2,8 @@ import os
 import jinja2
 import webapp2
 import logging
+import json
+import pickle
 import necessaryQueries
 import addClass
 from google.appengine.api import users
@@ -13,8 +15,12 @@ class Word(ndb.Model):
     pinyin = ndb.StringProperty()
     english = ndb.StringProperty()
 
+def jsonfilter(value):
+    return json.dumps(value)
+
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)))
-                                       
+#jinja_environment.filters['json'] = jsonfilter
+
 class Struct(): pass
 data = Struct()
 data.main_info = {'user': users.get_current_user(),
@@ -84,9 +90,10 @@ class EditWordsHandler(webapp2.RequestHandler):
             word.put()
             
         self.get()
+        
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
-        f = addClass.Add()
+        f = pickle.dumps([0,1,2,3,'hello',8])
         template_values = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/'),
         'addClass':f}

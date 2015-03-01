@@ -2,10 +2,6 @@ $(function () {
 	$("table td p").mousedown(function() {
 		alert($(this).html());
 	}),
-	$("#words_to_find ul li").click(function() {
-		console.log('-__-');
-		alert($(this).html());
-	}),
 	$('#sync_button').click(function() {
 		var text = document.getElementById("textarea").value;
 		var words = text.split(" ");
@@ -20,7 +16,7 @@ $(function () {
 				id = word;
 				word = word.replace(/_/g, " ");
 				current_html = $('#words_to_find').html();
-				new_html = "<li onclick='show_results(" + found + ")'>" 
+				new_html = "<li onclick='show_results(" + found + ")'>"
 							+ word + "</li>";
 				$('#words_to_find').html(current_html + new_html);
 				found += 1;

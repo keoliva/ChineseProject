@@ -7,11 +7,11 @@
 	<script src="/static/js/list.js"></script>
 	</head>
 	<body>
-	{{ addClass.find_sum().chi.decode('utf-8') }}
-	
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
+	<p class="argument_str" id="new_str" style="display:none"></p>
 	<ul id="menu">
+	
 	
 		<li><a href="/">HOME</a></li>
 		<li><a href="/enter">CREATE</a>
@@ -21,6 +21,12 @@
 				<li><a href="/write">Write Essay</a></li>
 			</ul></li>
 	</ul>
+	<script>
+	var arg = document.getElementsByClassName('argument_str')[0].id;
+	console.log('{{ addClass }}');
+	var fn = {{ addClass }}[4];
+	console.log(fn);
+	</script>
 	<h3>Press the F7 key to automatically sync all the words in the 
 	text area!</h3>
 	<div>
@@ -36,7 +42,7 @@
 	    </form>
 	  </div>
 	
-	  <div class="scrollableArea">
+	  <div id="scrollableArea">
 		<table>
 			<tr>
 				<td><p>已经</p></td>

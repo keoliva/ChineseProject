@@ -20,8 +20,9 @@ tr:nth-child(odd) td:nth-child(odd){
 tr:nth-child(even) td:nth-child(even){
     background-color:#f5f5f5;
 }
-.scrollableArea {
-	float:right
+#scrollableArea {
+	float:right;
+	visibility:hidden;
 }
 #words_to_find {
 	
