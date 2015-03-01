@@ -23,3 +23,10 @@ tr:nth-child(even) td:nth-child(even){
 .scrollableArea {
 	float:right
 }
+#words_to_find {
+	
+}
+#words_to_find li:hover{
+	color:green;
+	cursor:pointer;
+}
