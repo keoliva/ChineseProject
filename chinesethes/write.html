@@ -7,6 +7,8 @@
 	<script src="/static/js/list.js"></script>
 	</head>
 	<body>
+	{{ addClass.find_sum().chi.decode('utf-8') }}
+	
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
 	<ul id="menu">

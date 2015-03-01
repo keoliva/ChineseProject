@@ -3,6 +3,7 @@ import jinja2
 import webapp2
 import logging
 import necessaryQueries
+import addClass
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -84,9 +85,11 @@ class EditWordsHandler(webapp2.RequestHandler):
             
         self.get()
 class WritingHandler(webapp2.RequestHandler):
-    def get(self): 
+    def get(self):
+        f = addClass.Add()
         template_values = {'user': users.get_current_user(),
-        'logout_url': users.create_logout_url('/')}
+        'logout_url': users.create_logout_url('/'),
+        'addClass':f}
         
         template = jinja_environment.get_template('write.html')
         self.response.write(template.render(template_values))
