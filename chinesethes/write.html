@@ -4,15 +4,9 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/write_style.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/static/js/find.js"></script>
-	<script>
-	$(function () {
-		$("#table td").mousedown(function () {
-			$("#demo").html("HELLO");
-		});
-	});
-	</script>
+	<script src="/static/js/list.js"></script>
 	</head>
-	<body onload="find()">
+	<body>
 	Welcome back {{ user.nickname }}!!! 
 	<a href="{{ logout_url }}">Logout</a>
 	<ul id="menu">
@@ -27,7 +21,9 @@
 	<div>
 	<div id="create_text" style="float:left;">
 	<p id="demo"></p>
-	<p id="demo1"></p>
+	<ul id="words_to_find">
+	</ul>
+	<button onclick="find()">UPTOWN FUNK YOU UP</button>
     <form action="/write" method="POST" enctype="multipart/form-data">
 		<textarea id="textarea" name="textarea" rows="20" cols="100" 
 			 value="">
