@@ -3,9 +3,6 @@
         self.chi = chi
         self.english = english
         self.pinyin = pinyin
-        self.fn = lambda x: self.yomama(x)
-    def yomama(self, x):
-        return x+"hhhhhhhhhhh"
         
 class Add():
     @classmethod 

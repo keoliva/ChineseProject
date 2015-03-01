@@ -1,4 +1,4 @@
-import os
+﻿import os
 import jinja2
 import webapp2
 import logging
@@ -93,10 +93,12 @@ class EditWordsHandler(webapp2.RequestHandler):
         
 class WritingHandler(webapp2.RequestHandler):
     def get(self):
-        f = pickle.dumps([0,1,2,3,'hello',8])
+        x = addClass.Words('中','center','zhong1')
+        word = pickle.dumps(x.__dict__)
+        word_dict = pickle.loads(word)
         template_values = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/'),
-        'addClass':f}
+        'word':word_dict}
         
         template = jinja_environment.get_template('write.html')
         self.response.write(template.render(template_values))
