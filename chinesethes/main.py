@@ -1,4 +1,5 @@
-﻿import os
+# -*- coding: utf-8 -*-
+import os
 import jinja2
 import webapp2
 import logging
@@ -98,7 +99,7 @@ class WritingHandler(webapp2.RequestHandler):
         word_dict = pickle.loads(word)
         template_values = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/'),
-        'word':word_dict}
+        'word': x}
         
         template = jinja_environment.get_template('write.html')
         self.response.write(template.render(template_values))
