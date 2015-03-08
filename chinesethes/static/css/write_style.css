@@ -22,7 +22,6 @@ tr:nth-child(even) td:nth-child(even){
 }
 #scrollableArea {
 	float:right;
-	visibility:hidden;
 }
 #words_to_find {
 	

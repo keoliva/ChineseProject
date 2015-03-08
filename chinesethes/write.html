@@ -21,7 +21,6 @@
 				<li><a href="/write">Write Essay</a></li>
 			</ul></li>
 	</ul>
-	{{ word.chi.decode('utf-8') }}
 	<script>;
 	var arg = document.getElementsByClassName('argument_str')[0].id;
 	</script>
@@ -42,21 +41,16 @@
 	
 	  <div id="scrollableArea">
 		<table>
+			{% set table_dict = ADD.html_dict() %}
+			{% for key,value in table_dict|dictsort %}
 			<tr>
-				<td><p>已经</p></td>
-				<td><p>一直</p></td>		
-				<td><p>大雨</p></td>
+				{% for word in table_dict[key] %}
+				<td>
+					{{ word.chi.decode('utf-8') }}
+				</td>
+				{% endfor %}
 			</tr>
-			<tr>
-				<td><p>名字</p></td>
-				<td><p>大风</p></td>		
-				<td><p>存在</p></td>
-			</tr>
-			<tr>
-				<td><p>越来越好</p></td>
-				<td><p>终于</p></td>		
-				<td><p>地道</p></td>
-			</tr>
+			{% endfor %}
 		</table>
 	</div>
 	</div>
