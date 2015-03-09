@@ -13,7 +13,7 @@ def find_square(n):
         
 class Add(object):
     def find_sum(self,x):
-        return [Words('真的吗','zhen1de2mazhen1de2ma','really'),
+        return [Words('真的吗','zhen1de2ma','really'),
                 Words('新鲜','xin1xian4','fresh'),
                 Words('桌子','zhuo1zi4','table'),
                 Words('疯狂','feng1kuang4','crazy'),

@@ -48,8 +48,11 @@
 			{% for key,value in table_dict|dictsort %}
 			<tr>
 				{% for word in table_dict[key] %}
-				<td onclick="display_word(key)">
-					{{ word.chi.decode('utf-8') }}
+				{% set chi = word.chi.decode('utf-8') %}
+				{% set english = word.english %}
+				{% set pinyin = word.pinyin %}
+				<td onclick="display_word('{{ chi }}','{{ english }}','{{ pinyin }}')">
+					<p>{{ chi }}</p>
 				</td>
 				{% endfor %}
 			</tr>

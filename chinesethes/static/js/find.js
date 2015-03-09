@@ -1,5 +1,5 @@
 $(function () {
-	$("table td p").mousedown(function() {
+	$("table td p").dblclick(function() {
 		alert($(this).html());
 	}),
 	$('#sync_button').click(function() {

@@ -8,3 +8,10 @@ function show_results(i) {
 	
 	var table = document.getElementById("scrollableArea")
 }
+
+function display_word(chi, pinyin, english) {
+	var div = document.getElementById("word_info")
+	div.innerHTML = chi + 
+					' (' + pinyin + ') : <br>' +
+					english
+}
