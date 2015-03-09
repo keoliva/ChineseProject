@@ -38,14 +38,17 @@
 		  <input type="submit">
 	    </form>
 	  </div>
-	
+	  <div id="word_info"></div>
 	  <div id="scrollableArea">
-		<table>
-			{% set table_dict = ADD.html_dict() %}
+		{% set result = ADD.html_dict() %}
+		{% set table_dict = result[0] %}
+		{% set root = result[2] %}
+		{% set max_len = 450 %}
+		<table style="width:{{ max_len }}px; height:{{ max_len }}px">
 			{% for key,value in table_dict|dictsort %}
 			<tr>
 				{% for word in table_dict[key] %}
-				<td>
+				<td onclick="display_word(key)">
 					{{ word.chi.decode('utf-8') }}
 				</td>
 				{% endfor %}

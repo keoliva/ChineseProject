@@ -13,11 +13,21 @@ def find_square(n):
         
 class Add(object):
     def find_sum(self,x):
-        return [Words('真的吗','zhen1de2ma','really'),
+        return [Words('真的吗','zhen1de2mazhen1de2ma','really'),
                 Words('新鲜','xin1xian4','fresh'),
-                Words('桌子','zhuo1zi4','table')]
+                Words('桌子','zhuo1zi4','table'),
+                Words('疯狂','feng1kuang4','crazy'),
+                Words('对不起','dui4bu4qi3','sorry'),
+                Words('中文','zhong1wen2','chinese'),
+                Words('了解','liao3jie3','understand')]
     def html_dict(self):
         words = self.find_sum(5)
+        descriptions = map(lambda x: (x.chi,x.english,x.pinyin), words)
+        eng_words = map(lambda x: x[1], descriptions)
+        
+        max_len_eng = reduce(lambda x,y: x if len(x)>len(y) else y, eng_words)
+
+        max_len_eng  = len(max_len_eng)
         n = len(words)
         
         root = find_square(n)
@@ -29,4 +39,4 @@ class Add(object):
             if (j == div):
                 content[j] = words[index:]
             content[j] = words[index: index + root]
-        return content
+        return [content, max_len_eng, root]
