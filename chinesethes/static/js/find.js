@@ -16,8 +16,7 @@ $(function () {
 			word = text.substr(index+1, len_of_word);
 			word = word.replace(/_/g, " ");
 			current_html = $('#words_to_find').html();
-			new_html = "<li onclick='show_results(" + found + ")'>"
-							+ word + "</li>";
+			var new_html = "<li class='selected_word'>"+ word + "</li>";
 			$('#words_to_find').html(current_html + new_html);
 			found += 1;
 				
@@ -30,5 +29,12 @@ $(function () {
 		if (event.keyCode == 118) {
 			$('#sync_button').click();
 		}
+	}),
+    $(document).on("click", "form#word_to_find ul#words_to_find li.selected_word",function() {
+	    $('#word_to_find').submit();
+    }),
+    $('#word_to_find').submit(function() {
+		console.log('you thereddd');
+		return false;
 	})
 });

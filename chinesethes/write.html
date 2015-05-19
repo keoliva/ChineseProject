@@ -11,8 +11,6 @@
 	<a href="{{ logout_url }}">Logout</a>
 	<p class="argument_str" id="new_str" style="display:none"></p>
 	<ul id="menu">
-	
-	
 		<li><a href="/">HOME</a></li>
 		<li><a href="/enter">CREATE</a>
 			<ul>
@@ -28,8 +26,10 @@
 	text area!</h3>
 	<div>
 	  <div id="create_text" style="float:left;">
-	   <ul id="words_to_find">
-	   </ul>
+	   <form id="word_to_find" action="/write" method="POST" enctype="multipart/form-data">
+	     <ul id="words_to_find">
+	     </ul>
+	   </form>
 	   <button id="sync_button" onclick="find()">UPTOWN FUNK YOU UP</button>
        <form action="/write" method="POST" enctype="multipart/form-data">
 		  <textarea id="textarea" name="textarea" rows="20" cols="100" 
