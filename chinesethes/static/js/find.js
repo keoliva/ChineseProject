@@ -16,7 +16,8 @@ $(function () {
 			word = text.substr(index+1, len_of_word);
 			word = word.replace(/_/g, " ");
 			current_html = $('#words_to_find').html();
-			var new_html = "<li class='selected_word'>"+ word + "</li>";
+			var new_html = "<li class='selected_word'><a href='/find_word/" + word + "' target='right_side'>" + word + "</a></li>";
+			var new_html = "<li class='selected_word'><a href='/find_word' target='right_side'>" + word + "</a></li>";
 			$('#words_to_find').html(current_html + new_html);
 			found += 1;
 				
@@ -31,10 +32,7 @@ $(function () {
 		}
 	}),
     $(document).on("click", "form#word_to_find ul#words_to_find li.selected_word",function() {
-	    $('#word_to_find').submit();
-    }),
-    $('#word_to_find').submit(function() {
-		console.log('you thereddd');
-		return false;
-	})
+		var word = $(this).html();
+		
+    })
 });

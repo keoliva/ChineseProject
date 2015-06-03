@@ -7,9 +7,8 @@
 	<script src="/static/js/list.js"></script>
 	</head>
 	<body>
-	Welcome back {{ user.nickname }}!!! 
+	Welcome back {{ user.nickname }}!!!
 	<a href="{{ logout_url }}">Logout</a>
-	<p class="argument_str" id="new_str" style="display:none"></p>
 	<ul id="menu">
 		<li><a href="/">HOME</a></li>
 		<li><a href="/enter">CREATE</a>
@@ -19,46 +18,23 @@
 				<li><a href="/write">Write Essay</a></li>
 			</ul></li>
 	</ul>
-	<script>;
-	var arg = document.getElementsByClassName('argument_str')[0].id;
-	</script>
 	<h3>Press the F7 key to automatically sync all the words in the 
 	text area!</h3>
 	<div>
-	  <div id="create_text" style="float:left;">
-	   <form id="word_to_find" action="/write" method="POST" enctype="multipart/form-data">
-	     <ul id="words_to_find">
-	     </ul>
-	   </form>
-	   <button id="sync_button" onclick="find()">UPTOWN FUNK YOU UP</button>
-       <form action="/write" method="POST" enctype="multipart/form-data">
-		  <textarea id="textarea" name="textarea" rows="20" cols="100" 
-			 value="">
-		  </textarea>
-		  <input type="submit">
-	    </form>
-	  </div>
-	  <div id="word_info"></div>
-	  <div id="scrollableArea">
-		{% set result = ADD.html_dict() %}
-		{% set table_dict = result[0] %}
-		{% set root = result[2] %}
-		{% set max_len = 450 %}
-		<table style="width:{{ max_len }}px; height:{{ max_len }}px">
-			{% for key,value in table_dict|dictsort %}
-			<tr>
-				{% for word in table_dict[key] %}
-				{% set chi = word.chi.decode('utf-8') %}
-				{% set english = word.english %}
-				{% set pinyin = word.pinyin %}
-				<td onclick="display_word('{{ chi }}','{{ english }}','{{ pinyin }}')">
-					<p>{{ chi }}</p>
-				</td>
-				{% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
-	</div>
+		<div id="create_text" style="float:left;">
+			<form id="word_to_find" action="/write" method="POST" enctype="multipart/form-data">
+				<ul id="words_to_find"></ul>
+			</form>
+			<button id="sync_button" onclick="find()">UPTOWN FUNK YOU UP</button>
+			<form action="/write" method="POST" enctype="multipart/form-data">
+				<textarea id="textarea" name="textarea" rows="20" cols="100" value=""></textarea>
+				<input type="submit">
+			</form>
+		</div>
+		
+		<iframe name="right_side" src="" width="500px" height="500px" frameBorder="0"
+				style="float:right;"></iframe>
+
 	</div>
 	</body>
 </html>

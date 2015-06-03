@@ -29,89 +29,96 @@ data.main_info = {'user': users.get_current_user(),
         'logout_url': users.create_logout_url('/')}
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self): 
-        template_values = {'user': users.get_current_user(),
-        'login_url': users.create_login_url('/enter'),
-        'logout_url': users.create_logout_url('/')}
+	def get(self): 
+		template_values = {'user': users.get_current_user(),
+		'login_url': users.create_login_url('/enter'),
+		'logout_url': users.create_logout_url('/')}
         #template_values.update(data.main_info)
         
-        template = jinja_environment.get_template('home.html')
-        self.response.write(template.render(template_values))
+		template = jinja_environment.get_template('home.html')
+		self.response.write(template.render(template_values))
 
 class EnterWordsHandler(webapp2.RequestHandler):
-    def get(self):
-        template_values = {'user': users.get_current_user(),
-        'logout_url': users.create_logout_url('/')}
+	def get(self):
+		template_values = {'user': users.get_current_user(),
+		'logout_url': users.create_logout_url('/')}
 
-        template = jinja_environment.get_template('enter.html')
-        self.response.write(template.render(template_values))
+		template = jinja_environment.get_template('enter.html')
+		self.response.write(template.render(template_values))
         
-    def post(self):
-        chi = self.request.get("chi")
-        pinyin = self.request.get("pinyin")
-        eng = self.request.get("eng")
+	def post(self):
+		chi = self.request.get("chi")
+		pinyin = self.request.get("pinyin")
+		eng = self.request.get("eng")
         
-        word = Word(user = users.get_current_user(),
+		word = Word(user = users.get_current_user(),
                     chinese = chi,
                     pinyin = pinyin,
                     english = eng)
-        word.put()
+		word.put()
 
-        self.get()
+		self.get()
 
 class EditWordsHandler(webapp2.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
+	def get(self):
+		user = users.get_current_user()
 
-        words = necessaryQueries.fetch_words()
-        data.words = words
-        data.len = len(words)
+		words = necessaryQueries.fetch_words()
+		data.words = words
+		data.len = len(words)
         
-        template_values = {'user': user, 'words': words,
+		template_values = {'user': user, 'words': words,
                            #'pinyin_list': pinyin_list, 'eng_list': eng_list,
         'logout_url': users.create_logout_url('/')}
         
-        template = jinja_environment.get_template('edit.html')
-        self.response.write(template.render(template_values))
+		template = jinja_environment.get_template('edit.html')
+		self.response.write(template.render(template_values))
 
-    def post(self):
-        if (hasattr(data, 'words') == False):
-            data.words = necessaryQueries.fetch_words()
-            data.len = len(data.words)
+	def post(self):
+		if (hasattr(data, 'words') == False):
+			data.words = necessaryQueries.fetch_words()
+			data.len = len(data.words)
 
-        for i in range(data.len): #number of entries
-            key = data.words[i].key
+		for i in range(data.len): #number of entries
+			key = data.words[i].key
             
-            chi = self.request.get("chi%d" % i)
-            pinyin = self.request.get("pinyin%d" % i)
-            eng = self.request.get("eng%d" % i)
+			chi = self.request.get("chi%d" % i)
+			pinyin = self.request.get("pinyin%d" % i)
+			eng = self.request.get("eng%d" % i)
 
-            word = key.get()
-            word.chinese,word.pinyin,word.english = chi,pinyin,eng
-            word.put()
+			word = key.get()
+			word.chinese,word.pinyin,word.english = chi,pinyin,eng
+			word.put()
             
-        self.get()
+			self.get()
         
 class WritingHandler(webapp2.RequestHandler):
-    def get(self):
-        #x = addClass.Words('dd','ll','gg')
-        y = addClass.Add()
-        template_values = {'user': users.get_current_user(),
-        'logout_url': users.create_logout_url('/'),
-        'ADD': y, 'WORD':7}
+	def get(self):
+		template_values = {'ADD':addClass.Add,'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
         
-        template = jinja_environment.get_template('write.html')
-        self.response.write(template.render(template_values))
+		template = jinja_environment.get_template('write.html')
+		self.response.write(template.render(template_values))
 
-    def post(self):
-        text = self.request.get("textarea")
-        data.text = text
-
-        self.get()
+	def post(self):  
+		template_values = {'ADD':addClass.Add,'user': users.get_current_user(),
+        'logout_url': users.create_logout_url('/')}
+		
+		template = jinja_environment.get_template('write.html')	
+		self.response.write(template.render(template_values))
+		
+class FindWordHandler(webapp2.RequestHandler):
+	def get(self):
+		template_values = {'ADD':addClass.Add(), 'word_to_find':'hellow'}
+		
+		template = jinja_environment.get_template('display_options.html')
+		self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/enter', EnterWordsHandler),
-    ('/edit', EditWordsHandler),
-    ('/write', WritingHandler),
+	('/', MainHandler),
+	('/enter', EnterWordsHandler),
+	('/edit', EditWordsHandler),
+	('/write', WritingHandler),
+	#webapp2.Route(r'/find_word/<word:*>', handler=FindWordHandler)
+	('/find_word', FindWordHandler)
 ], debug=True)
