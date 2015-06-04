@@ -4,7 +4,6 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/write_style.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/static/js/find.js"></script>
-	<script src="/static/js/list.js"></script>
 	</head>
 	<body>
 	Welcome back {{ user.nickname }}!!!
@@ -27,12 +26,12 @@
 			</form>
 			<button id="sync_button" onclick="find()">UPTOWN FUNK YOU UP</button>
 			<form action="/write" method="POST" enctype="multipart/form-data">
-				<textarea id="textarea" name="textarea" rows="20" cols="100" value=""></textarea>
-				<input type="submit">
+				<textarea id="textarea" name="textarea" rows="20" cols="80" value=""></textarea>
+				<br><input type="submit">
 			</form>
 		</div>
 		
-		<iframe name="right_side" src="" width="500px" height="500px" frameBorder="0"
+		<iframe name="right_side" src="" width="600px" height="600px" frameBorder="0"
 				style="float:right;"></iframe>
 
 	</div>

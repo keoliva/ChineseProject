@@ -7,7 +7,7 @@ function show_results(i) {
 	arg = arg[0];
 	arg.id = content;
 	
-	var table = document.getElementById("scrollableArea")
+	
 }
 
 function submit_word() {

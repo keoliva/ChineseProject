@@ -2,10 +2,12 @@
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="/static/css/write_style.css">
+	<script src="/static/js/list.js"></script>
 	</head>
 <body>
 <h1>{{ word_to_find }}</h1>
 <div id="scrollableArea">
+	<div id="word_info"></div>
 		{% set result = ADD.html_dict() %}
 		{% set table_dict = result[0] %}
 		{% set root = result[2] %}
