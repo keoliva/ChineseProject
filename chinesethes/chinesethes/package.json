@@ -1,0 +1,30 @@
+{
+  "name": "chinesethes",
+  "version": "1.0.0",
+  "description": "Store all the Chinese vocabulary you know, and when thinking about how to translate a word/phrase from English, this app assists you in figuring out whether or not how to translate it.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keoliva/ChineseProject"
+  },
+  "keywords": [
+    "chinese",
+    "synonyms"
+  ],
+  "author": "Kayla O.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keoliva/ChineseProject/issues"
+  },
+  "homepage": "https://github.com/keoliva/ChineseProject",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongodb": "^2.0.42",
+    "mongoose": "^4.1.5",
+    "monk": "^1.0.1",
+    "swig": "^1.4.2"
+  }
+}

@@ -1,0 +1,40 @@
+.close {
+	font-size:10px;
+}
+
+#view_edit_entries {
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+
+input {
+	text-align:center;
+}
+
+.btn {
+	width:100%;
+}
+
+#menu {
+	list-style-type:none;
+	margin:0px;
+}
+.form-group {
+	margin-right: 40px;
+}
+
+.form-group label {
+	color:white;
+}
+#enter_entry_footer {
+	padding-left: 10px;
+	position: fixed;
+	left: 0;
+    bottom: 0;
+    width: 100%;
+	padding: 10px;
+	background-color: rgba(34,34,34,1);
+    border-color: #080808;
+    box-shadow: 0 0 15px black;
+}
