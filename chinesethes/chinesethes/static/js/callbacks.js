@@ -44,6 +44,7 @@ var saveWordsCallback = function(xhttp) {
 					selector = '$("li.list-group-item.modified").find("div input[name=\'chinese\']")';
 					word = { chinese: $(this).find('div input[name="chinese"]').val(),
 							pinyin: $(this).find('div input[name="pinyin"]').val(),
+							partsOfSpeech: $(this).find('div input [name="partsOfSpeech"]').val(),
 							english: $(this).find('div textarea[name="english"]').val() };
 					result += "<li onclick=(" + selector + ".focus())>" + wordInfo(word) + "</li>"
 				} else { 
@@ -54,11 +55,12 @@ var saveWordsCallback = function(xhttp) {
 		}
 		if (addingErr.count) {
 			var hasError = addingErr.indices, result="", selector="";
-			$('').each(function(index, li) {
+			hasError.forEach(function(index, li) {
 				if (hasError[index]) {
-					'$("li.list-group-item.modified").find("div input[name=\'chinese\']")';
+					selector = '$("li.list-group-item.modified").find("div input[name=\'chinese\']")';
 					word = { chinese: $(this).find('div input[name="chinese"]').val(),
 							pinyin: $(this).find('div input[name="pinyin"]').val(),
+							partsOfSpeech: $(this).find('div input [name="partsOfSpeech"]').val(),
 							english: $(this).find('div textarea[name="english"]').val() };
 					result += "<li onclick=(" + selector + ".focus())>" + wordInfo(word) + "</li>"
 				} else { 

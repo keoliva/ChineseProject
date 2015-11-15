@@ -10,7 +10,7 @@ $(function () {
  	
 	$('#words_to_find').click(function(e) {
 		var word = $(e.target).html().replace(/ /g, "_");
-		sendRequest("GET", null, "/find_word/" + word, null, getWordRecsCallback);
+		sendRequest("GET", null, "/query_phrase/" + word, null, getWordRecsCallback);
 	});	
 	$('#sync_button').click(function() {
 		var text = $("textarea").val() + " ";

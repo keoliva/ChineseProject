@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 var wordSchema = new Schema({
 	userId: Schema.Types.ObjectId,
 	chinese: String,
-	pinyin: String ,
+	pinyin: String,
+	partsOfSpeech: String,
 	english: String
 });
 

@@ -1,4 +1,5 @@
 // signuplogin.js
+var User = require('../models/user.js');
 
 exports.authenticateUser = function(email, password, callback) {
 	User.findOne({ email: email }, function(err, user) {

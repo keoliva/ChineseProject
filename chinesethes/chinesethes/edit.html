@@ -29,7 +29,7 @@
 You have the option of editting past entries. This includes editting the attributes, or removing entries.
 </div>
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<ul id="view_edit_entries" class="list-group">
 			{% for word in words %}
 				<li class="list-group-item alert visible" id="{{ word._id | safe }}"><div class="row">
@@ -41,7 +41,11 @@ You have the option of editting past entries. This includes editting the attribu
 					<input type="text" name="pinyin" placeholder="pin1yin1"
 					value="{{ word.pinyin }}" class="form-control">
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-2">
+					<input type="text" name="partsOfSpeech" placeholder="Part of Speech"
+					value="{{ word.partsOfSpeech }}" class="form-control">
+					</div>
+					<div class="col-md-3" style="padding-right:0px;">
 					<textarea name="english" placeholder="English" 
 					cols="50" rows="2" style="resize:none;" class="form-control">{{ word.english }}</textarea>
 					</div>
@@ -53,11 +57,11 @@ You have the option of editting past entries. This includes editting the attribu
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<ul id="menu" data-spy="affix" data-offset-top="205">
 			<li><form class="form-inline" role="form">
 				<span class="glyphicon glyphicon-filter"></span>   :                      
-				<input type="text" id="queryFieldInput" class="form-control" placeholder="Filter Words" style="width:294px;">
+				<input type="text" id="queryFieldInput" class="form-control" placeholder="Filter Words">
 				</form>
 			</li>
 			<li><hr width="100%"></li>
@@ -92,6 +96,10 @@ You have the option of editting past entries. This includes editting the attribu
 	  <div class="form-group">
 		<label for="pinyin">拼音</label>
 		<input type="text" placeholder="pin1yin1" name="pinyin" class="form-control">
+	  </div>
+	   <div class="form-group">
+		<label for="partsOfSpeech">此类</label>
+		<input type="text" placeholder="pin1yin1" name="partsOfSpeech" class="form-control">
 	  </div>
 	  <div class="form-group">
 		<label for="english">用英文下定义</label>

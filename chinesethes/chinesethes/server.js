@@ -20,10 +20,10 @@ app.use(expressSession({ secret: 'secretstring', store: new MongoStore({ url: mo
 var User = require('./models/user.js');
 var Word = require('./models/word.js');
 
-var Middleware = require('./modules/sessionMiddleware.js'); 
-var getUserName = Middleware.getUserName; requireUser = Middleware.requireUser;
 var SignupLogin = require('./modules/signuplogin.js'); 
 var authenticateUser = SignupLogin.authenticateUser; createUser = SignupLogin.createUser;
+var Middleware = require('./modules/sessionMiddleware.js'); 
+var getUserName = Middleware.getUserName; requireUser = Middleware.requireUser;
 var Edit = require('./modules/edit.js');
 var removeWords = Edit.removeWords; modifyWords = Edit.modifyWords; addWords = Edit.addWords;
 
@@ -94,14 +94,14 @@ app.route('/write')
 		var form = req.body;
 	});
 	
-app.get('/find_word/:word', requireUser, getUserName, function (req, res) {
-	var word = req.params.word;
-	console.log("word being found: " + word);
-	var words = [{ chinese: "基本", pinyin: "ji1ben3", english: "simple" },
+app.get('/query_phrase/:phrase', requireUser, getUserName, function (req, res) {
+	var phrase = req.params.phrase.replace(/_/g, " ");
+	console.log("words being found: " + phrase);
+	var words = [{ chinese: "基本", pinyin: "ji1ben3", partsOfSpeech: "adj", english: "simple" },
 				{ chinese: "莫非", pinyin: "mo4fei1", english: "used at end of rhetorical question" },
-				{ chinese: "流行", pinyin: "liu2xing2", english: "popular; prevalent; fashionable"},
-				{ chinese: "转发", pinyin: "zhuan3fa1", english: "transmit" }];
-	res.json({ word_to_find: word, words: words }).end();
+				{ chinese: "流行", pinyin: "liu2xing2", partsOfSpeech: "adj", english: "popular; prevalent; fashionable"},
+				{ chinese: "转发", pinyin: "zhuan3fa1", partsOfSpeech: "verb", english: "transmit" }];
+	res.json({ word_to_find: phrase, words: words }).end();
 });
 
 app.post('/login', function (req, res) {
@@ -114,6 +114,7 @@ app.post('/login', function (req, res) {
 			console.log("error: " + err);
 			console.log("user: " + user);
 			if (err || !user) {
+				console.log("ERR In POST line 117: " + err);
 				errorInLogin = true;
 				res.redirect('/');
 			} else if (user) {

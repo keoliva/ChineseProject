@@ -18,7 +18,7 @@ exports.removeWords = function(removedIds, removingErr, cb) {
 		console.log("beginning of remove");
 		id = removedIds[i];
 		console.log("ID " + id);
-		userWordsQuery.findOneAndRemove({ _id: id }, "chinese pinyin english", function(err, word) {
+		userWordsQuery.findOneAndRemove({ _id: id }, function(err, word) {
 			if (err) {
 				console.log("error found " + err);
 				removingErr.wordsWithError.push(word);
@@ -49,7 +49,7 @@ exports.modifyWords = function(modifiedIds, updatingErr, cb) {
 	function modify() {
 		modifiedWord = modifiedIds[i];
 		console.log("MODIFY - i before async func call " + i);
-		doc = { chinese: modifiedWord.chinese, pinyin: modifiedWord.pinyin, english: modifiedWord.english };
+		doc = { chinese: modifiedWord.chinese, pinyin: modifiedWord.pinyin, partsOfSpeech: modifiedWord.partsOfSpeech, english: modifiedWord.english };
 		userWordsQuery.findOneAndUpdate({ _id: modifiedWord.id }, doc, function(err, word) {
 			if (err) {
 				updatingErr.indices[modifiedWord.index] = true;
