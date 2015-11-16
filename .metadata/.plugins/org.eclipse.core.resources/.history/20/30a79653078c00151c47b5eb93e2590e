@@ -1,6 +1,5 @@
 package reversedict;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
@@ -19,20 +18,13 @@ public class ReverseDictionary {
 	
 	public ReverseDictionary() throws Exception {
 		//String path = String.format("src/main/resources/WordNet-3.0/dict", new File("").getAbsolutePath());
-		String path = "src/main/resources/WordNet-3.0/dict";
-		URL pathToFile = new URL("file", null, path);
+		//URL url = new URL("file", null, path);
 		// construct the url to the Wordnet dictionary directory
-		//URL pathToFile = this.getClass().getClassLoader().getResource("resources/WordNet-3.0/dict");
-		System.out.print("Creating WordNet dict...");
-		long t = System.currentTimeMillis();
-		dict = new Dictionary(pathToFile);
-		System.out.printf("done creating (%1d msec)\n", System.currentTimeMillis()-t);
-		t = System.currentTimeMillis();
-		dict.open();
-		System.out.printf("done opening (%1d msec)\n", System.currentTimeMillis()-t);
-		// construct the dictionary object and open it
+		URL pathToFile = this.getClass().getClassLoader().getResource("resources/WordNet-3.0/dict");
 		
-		/**dict = new RAMDictionary(pathToFile, ILoadPolicy.NO_LOAD);
+		//dict = new Dictionary(url);
+		// construct the dictionary object and open it
+		dict = new RAMDictionary(pathToFile, ILoadPolicy.BACKGROUND_LOAD);
 		dict.open();
 		
 		// done slowly
@@ -46,35 +38,6 @@ public class ReverseDictionary {
 		
 		// done quickers
 		trek(dict);
-		
-		System.out.print("Loading dictionary data...");
-		long t = System.currentTimeMillis();
-		dict = new RAMDictionary(pathToFile);
-		((RAMDictionary) dict).setLoadPolicy(ILoadPolicy.IMMEDIATE_LOAD);
-		dict.open();
-		t = System.currentTimeMillis()-t;
-		System.out.printf("done (%1d sec, args)\n", t/1000);
-		
-		File exFile = File.createTempFile("JWI_Export_", ".wn");
-		exFile.deleteOnExit();
-		
-		System.out.print("Exporting dictionary data...");
-		t = System.currentTimeMillis();
-		((RAMDictionary) dict).export(new FileOutputStream(exFile));
-		dict.close();
-		t = System.currentTimeMillis()-t;
-		System.out.printf("done (%1d sec)\n", t/1000);
-		
-		System.out.printf("Export is %1d MB\n", exFile.length()/1048576);
-		
-		System.out.print("Loading from exported data...");
-		t = System.currentTimeMillis();
-		dict = new RAMDictionary(exFile);
-		dict.open();
-		t = System.currentTimeMillis()-t;
-		System.out.printf("done (%1d sec)\n", t/1000);
-		
-		trek(dict);*/
 	}
 	public void trek(IDictionary dict) {
 		int tickNext = 0;

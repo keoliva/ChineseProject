@@ -23,15 +23,9 @@ public class ReverseDictionary {
 		URL pathToFile = new URL("file", null, path);
 		// construct the url to the Wordnet dictionary directory
 		//URL pathToFile = this.getClass().getClassLoader().getResource("resources/WordNet-3.0/dict");
-		System.out.print("Creating WordNet dict...");
-		long t = System.currentTimeMillis();
-		dict = new Dictionary(pathToFile);
-		System.out.printf("done creating (%1d msec)\n", System.currentTimeMillis()-t);
-		t = System.currentTimeMillis();
-		dict.open();
-		System.out.printf("done opening (%1d msec)\n", System.currentTimeMillis()-t);
-		// construct the dictionary object and open it
 		
+		//dict = new Dictionary(url);
+		// construct the dictionary object and open it
 		/**dict = new RAMDictionary(pathToFile, ILoadPolicy.NO_LOAD);
 		dict.open();
 		
@@ -45,7 +39,7 @@ public class ReverseDictionary {
 		System.out.printf("done (%1d msec)\n", System.currentTimeMillis()-t);
 		
 		// done quickers
-		trek(dict);
+		trek(dict);*/
 		
 		System.out.print("Loading dictionary data...");
 		long t = System.currentTimeMillis();
@@ -74,7 +68,7 @@ public class ReverseDictionary {
 		t = System.currentTimeMillis()-t;
 		System.out.printf("done (%1d sec)\n", t/1000);
 		
-		trek(dict);*/
+		trek(dict);
 	}
 	public void trek(IDictionary dict) {
 		int tickNext = 0;

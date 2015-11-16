@@ -26,5 +26,10 @@
 			<type>1</type>
 			<location>C:/Users/Kayla/Downloads/edu.mit.jwi_2.4.0.jar</location>
 		</link>
+		<link>
+			<name>src/main/resources/WordNet-3.0</name>
+			<type>2</type>
+			<location>C:/Users/Kayla/Documents/0123/chineseproject/ChineseProject/reversedict/src/main/resources/WordNet-3.0</location>
+		</link>
 	</linkedResources>
 </projectDescription>

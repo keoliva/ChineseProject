@@ -1,0 +1,45 @@
+package reversedict;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import edu.mit.jwi.Dictionary;
+import edu.mit.jwi.IDictionary;
+import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.IWord;
+import edu.mit.jwi.item.IWordID;
+import edu.mit.jwi.item.POS;
+
+public class ReverseDictionary {
+	private static IDictionary dict;
+	
+	public ReverseDictionary() throws IOException {
+		String path = String.format(".\\WordNet-3.0\\dict", new File("").getAbsolutePath());
+		URL url = new URL("file", null, path);
+		
+		dict = new Dictionary(url);
+		dict.open();
+	}
+	
+	public void findRelativePath() {
+		IIndexWord idxWord = dict.getIndexWord("dog", POS.NOUN);
+		IWordID wordID = idxWord.getWordIDs().get(0);
+		IWord word = dict.getWord(wordID);
+		System.out.println("Id = " + wordID);
+		System.out.println("Lemma = " + word.getLemma());
+		System.out.println("Gloss = " + word.getSynset().getGloss());
+	}
+
+	public static void main(String args[]) {
+		// check if terms being queried have been queried before
+		// possibly a properties file
+		ReverseDictionary dict;
+		try {
+			dict = new ReverseDictionary();
+			dict.findRelativePath();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
