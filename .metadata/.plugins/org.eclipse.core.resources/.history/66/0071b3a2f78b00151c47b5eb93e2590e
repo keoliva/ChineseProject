@@ -1,0 +1,19 @@
+package reversedict;
+import edu.mit.jwi.Dictionary;
+
+public class ReverseDictionary {
+	
+	public ReverseDictionary() {}
+	
+	public void findRelativePath() {
+		String path = getClass().getClassLoader().getResource(".").getPath();
+		System.out.println(path);
+	}
+
+	public static void main(String args[]) {
+		// check if terms being queried have been queried before
+		// possibly a properties file
+		ReverseDictionary dict = new ReverseDictionary();
+		dict.findRelativePath();
+	}
+}
