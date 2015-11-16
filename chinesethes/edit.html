@@ -1,37 +1,115 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	<link rel="stylesheet" type="text/css" href="/static/css/edit_style.css">
-	</head>
-	<body>
-	Welcome back {{ user.nickname }}!!!
-	<a href="{{ logout_url }}">Logout</a>
-	<ul id="menu">
-		<li><a href="/">HOME</a></li>
-		<li><a href="/enter">CREATE</a>
-			<ul>
-				<li><a href="/enter">Enter New Entries</a></li>
-				<li><a href="/edit">View/Edit Entries</a></li>
-				<li><a href="/write">Write Essay</a></li>
-			</ul></li>
-	</ul>
-	<div id="view_edit_entries">
-	<form action="/edit" method="POST" enctype="multipart/form-data">
-		<table>
-		<tr>
-			<th>ZHONGWEN</th>
-			<th>PINYIN</th>
-			<th>ENGLISH</th>
-		</tr>
-		{% for word in words %}
-		<tr>
-			<td><input type= "text" name="chi{{ loop.index0 }}" value="{{ word.chinese }}"></td>
-			<td><input type="text" name="pinyin{{ loop.index0 }}" value="{{ word.pinyin }}"></td>
-			<td><input type="text" name="eng{{ loop.index0 }}" value="{{ word.english }}"></td>
-		</tr>
-		{% endfor %}
-		</table>
-		<input type="submit">
-	</form>
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/edit_style.css">
+<script>
+	var userId = {{ userId | json | safe }};
+</script>
+<script src="/static/js/edit.js"></script>
+<script src="/static/js/util.js"></script>
+<script src="/static/js/callbacks.js"></script>
+<script src="/static/js/sendrequest.js"></script>
+{% endblock %}
+
+{% block menu %}
+<li><a href="/">HOME</a></li>
+<li class="dropdown active">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">CREATE 
+	  <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="/edit">View/Edit Entries</a></li>
+			<li><a href="/write">Write Essay</a></li>
+		</ul>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron" style="padding:30px;margin-bottom: 10px;">
+<h3>View/Edit Entries</h3>
+You have the option of editting past entries. This includes editting the attributes, or removing entries.
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<ul id="view_edit_entries" class="list-group">
+			{% for word in words %}
+				<li class="list-group-item alert visible" id="{{ word._id | safe }}"><div class="row">
+					<div class="col-md-3">
+					<input type="text" name="chinese" placeholder="中文" 
+					value="{{ word.chinese }}" class="form-control">
+					</div>
+					<div class="col-md-3">
+					<input type="text" name="pinyin" placeholder="pin1yin1"
+					value="{{ word.pinyin }}" class="form-control">
+					</div>
+					<div class="col-md-2">
+					<input type="text" name="partsOfSpeech" placeholder="Part of Speech"
+					value="{{ word.partsOfSpeech }}" class="form-control">
+					</div>
+					<div class="col-md-3" style="padding-right:0px;">
+					<textarea name="english" placeholder="English" 
+					cols="50" rows="2" style="resize:none;" class="form-control">{{ word.english }}</textarea>
+					</div>
+					<div class="col-md-1">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span></a>		
+					</div>
+				</div></li>
+			{% endfor %}
+		</ul>
 	</div>
-</html>
+	<div class="col-md-3">
+		<ul id="menu" data-spy="affix" data-offset-top="205">
+			<li><form class="form-inline" role="form">
+				<span class="glyphicon glyphicon-filter"></span>   :                      
+				<input type="text" id="queryFieldInput" class="form-control" placeholder="Filter Words">
+				</form>
+			</li>
+			<li><hr width="100%"></li>
+			<li><div class="panel panel-warning">
+				<div class="panel-heading" data-toggle="collapse" data-target="#warnings" style="text-align:center;">
+					WARNINGS   
+					<span id="warnings_count" class="badge"></span>
+					
+					<span class="glyphicon glyphicon-collapse-up collapsed" style="float:right;"></span>
+				</div>
+				<div class="panel-body">
+					<ul id="warnings" class="collapse">
+					</ul>
+				</div>
+			</div></li>
+			<li><hr width="100%"></li>
+			<li><button id="add_btn" class="btn btn-default">ADD    <span class="glyphicon glyphicon-plus"></span>
+				</button></li>
+			<li><hr width="100%"></li>
+			<li><button id="save_btn" class="btn btn-default">SAVE    <span class="glyphicon glyphicon-ok"></span>
+				</button></li>
+		</ul>
+	</div>
+</div>
+
+<div id="enter_entry_footer" style="display:none; padding-left: 50px;">
+	<form id="add_entry" class="form-inline" role="form">
+	  <div class="form-group">
+		<label for="chinese" style="color:white;">汉子</label>
+		<input type="text" placeholder="中文" name="chinese" class="form-control">
+	  </div>
+	  <div class="form-group">
+		<label for="pinyin">拼音</label>
+		<input type="text" placeholder="pin1yin1" name="pinyin" class="form-control">
+	  </div>
+	   <div class="form-group">
+		<label for="partsOfSpeech">此类</label>
+		<input type="text" placeholder="pin1yin1" name="partsOfSpeech" class="form-control">
+	  </div>
+	  <div class="form-group">
+		<label for="english">用英文下定义</label>
+		<textarea placeholder="English" name="english" class="form-control" 
+		cols="50" rows="2" style="resize:none;"></textarea>
+	  </div>
+	  <div class="form-group">
+		<input type="submit" class="btn btn-success" value="ADD" style="width:150px;">
+	  </div>
+	  <i id="footer_close" class="glyphicon glyphicon-remove" style="color:white;" aria-label="close"></i>	
+	</form>
+</div>
+{% endblock %}

@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	</head>
-	<body>
-	{% if user %}
-		Welcome back {{ user.nickname }}!!! 
-	<a href="{{ logout_url }}">Logout</a>
-	
-	<ul id="menu">
-		<li><a href="/">HOME</a></li>
-		<li><a href="/enter">CREATE</a></li>
-	</ul>
-	{% else %}
-		Welcome! Please login to use the web application!!
-		<a href="{{ login_url }}">Signup or Login</a>
-	{% endif %}
-	<br>
-	<h1>About the web app...</h1>
-	</body>
-</html>
+{% extends "base.html" %}
+{% block head %}
+	<style>
+	li.active {
+	  text-decoration: underline;
+	}
+	</style>
+	<script src="/static/js/signuplogin.js"></script>
+{% endblock %}
+
+{% block menu %}
+<li class="active"><a href="/">HOME</a></li>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">CREATE 
+	  <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="/edit">View/Edit Entries</a></li>
+			<li><a href="/write">Write Essay</a></li>
+		</ul>
+</li>
+{% endblock %}
+
+{% block content %}	
+<h1>About the webapp...</h1>
+{% endblock content %}

@@ -95,31 +95,21 @@ public class ReverseDictionary {
 		System.out.printf("done (%1d msec)\n", System.currentTimeMillis()-t);
 		System.out.printf("In my trek I saw " + seen + "words");
 	}
-	public void findRelativePath() {
+	public String findRelativePath() {
 		IIndexWord idxWord = dict.getIndexWord("dog", POS.NOUN);
 		IWordID wordID = idxWord.getWordIDs().get(0);
 		IWord word = dict.getWord(wordID);
 		System.out.println("Id = " + wordID);
 		System.out.println("Lemma = " + word.getLemma());
 		System.out.println("Gloss = " + word.getSynset().getGloss());
+		return word.getSynset().getGloss();
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
 		// check if terms being queried have been queried before
 		// possibly a properties file
 		ReverseDictionary dict;
-		try {
-			dict = new ReverseDictionary();
-			dict.findRelativePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dict = new ReverseDictionary();
+		//dict.findRelativePath();
 	}
 }
