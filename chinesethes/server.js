@@ -27,23 +27,10 @@ var getUserName = Middleware.getUserName; requireUser = Middleware.requireUser;
 var Edit = require('./modules/edit.js');
 var removeWords = Edit.removeWords; modifyWords = Edit.modifyWords; addWords = Edit.addWords;
 
-var d = new Date();
-var t = d.getTime();
-console.log("java stuff getting ready");
-var java = require('./modules/javaInit');
-var java = javaInit.getJavaInstance();
-var reversedict; // = java.newInstanceSync("reversedict.ReverseDictionary");
-java.newInstance('reversedict.ReverseDictionary', function(err, reversedict) {
-	if (err) { console.error(err); return; }
-	reversedict = this.reversedict;
-	console.log("new instance of reversedict");
-	console.log("stuff done: " + (d.getTime() - t));
-});
-
 app.get('/', getUserName, function (req, res) {
 	res.end(swig.renderFile("home.html", { name: currentUserName,
-											errorInLogin: errorInLogin,
-											errorInSignup: errorInSignup }));
+										   errorInLogin: errorInLogin,
+										   errorInSignup: errorInSignup }));
 	errorInLogin = errorInSignup = false;
 });
 
