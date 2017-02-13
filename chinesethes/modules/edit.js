@@ -69,7 +69,7 @@ exports.modifyWords = function(modifiedIds, updatingErr, cb) {
 	 else return modify();
 };
 
-exports.addWords = function(newWords, addingErr, cb) {
+exports.addWords = function(newWords, addingErr, cb) { 
 	var i = 0, ids = newWords.length, word, index;
 	function callback() {
 		i++;
@@ -80,7 +80,7 @@ exports.addWords = function(newWords, addingErr, cb) {
 			add();
 		}
 	}
-	console.log("adding word");
+
 	function add() {
 		word = newWords[i];
 		index = word.index;	

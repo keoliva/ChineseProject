@@ -99,7 +99,6 @@ app.get('/query_phrase/:phrase', requireUser, getUserName, function (req, res) {
 	console.log("words being found: " + phrase);
 	var words;
 	try {
-		console.log("defintion: " + reversedict.findRelativePath());
 		var words = [{ chinese: "基本", pinyin: "ji1ben3", partsOfSpeech: "adj", english: "simple" },
 				{ chinese: "莫非", pinyin: "mo4fei1", english: "used at end of rhetorical question" },
 				{ chinese: "流行", pinyin: "liu2xing2", partsOfSpeech: "adj", english: "popular; prevalent; fashionable"},

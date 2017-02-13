@@ -1,5 +1,7 @@
 *.class
 
+*.lock
+
 # metadata
 .metadata/*
 

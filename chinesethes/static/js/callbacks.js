@@ -89,7 +89,7 @@ function display_word(e) {
 	console.log($(this).data('word'));
 	var word = $(this).data('word');
 	
-	var a = '<a href="http://www.iciba.com/"' + word.chinese + 
+	var a = '<a href="http://www.iciba.com/' + word.chinese + 
 		'" target="_blank">Learn more about the word.</a>';
 	$('#word_info').html(a + '<br>' + word.chinese + ' (' + word.pinyin + 
 		') : <br>' + word.english);

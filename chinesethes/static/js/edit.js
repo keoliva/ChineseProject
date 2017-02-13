@@ -30,7 +30,7 @@ $(function() {
 	});
 	
 	function wordInfo(word) {
-		return word.chinese + " -- (" + word.partsOfSpeech + ") " word.pinyin + " -- " + word.english;	
+		return word.chinese + " -- (" + word.partsOfSpeech + ") " + word.pinyin + " -- " + word.english;	
 	}
 	
 	$.fn.exists = function () {
