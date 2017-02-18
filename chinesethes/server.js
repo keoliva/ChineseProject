@@ -26,6 +26,8 @@ var Middleware = require('./modules/sessionMiddleware.js');
 var getUserName = Middleware.getUserName; requireUser = Middleware.requireUser;
 var Edit = require('./modules/edit.js');
 var removeWords = Edit.removeWords; modifyWords = Edit.modifyWords; addWords = Edit.addWords;
+var Find = require('./modules/findRelatedWords.js');
+var findRelatedWords = Find.findRelatedWords;
 
 app.get('/', getUserName, function (req, res) {
 	res.end(swig.renderFile("home.html", { name: currentUserName,
@@ -96,17 +98,19 @@ app.route('/write')
 	
 app.get('/query_phrase/:phrase', requireUser, getUserName, function (req, res) {
 	var phrase = req.params.phrase.replace(/_/g, " ");
-	console.log("words being found: " + phrase);
-	var words;
-	try {
-		var words = [{ chinese: "基本", pinyin: "ji1ben3", partsOfSpeech: "adj", english: "simple" },
+	
+	var currentUserId = req.session.currentUser._id, words;
+	getWords(currentUserId, function () {
+		userWordsQuery.exec(function(err, userWords) {
+			findRelatedWords(userWords, phrase, function (words) {
+				res.json({ word_to_find: phrase, words: words }).end();
+			});
+		});
+		/**var words = [{ chinese: "基本", pinyin: "ji1ben3", partsOfSpeech: "adj", english: "simple" },
 				{ chinese: "莫非", pinyin: "mo4fei1", english: "used at end of rhetorical question" },
 				{ chinese: "流行", pinyin: "liu2xing2", partsOfSpeech: "adj", english: "popular; prevalent; fashionable"},
-				{ chinese: "转发", pinyin: "zhuan3fa1", partsOfSpeech: "verb", english: "transmit" }];
-	} catch(ex) {
-		words = []
-	}
-	res.json({ word_to_find: phrase, words: words }).end();
+				{ chinese: "转发", pinyin: "zhuan3fa1", partsOfSpeech: "verb", english: "transmit" }];*/
+	});	
 });
 
 app.post('/login', function (req, res) {
