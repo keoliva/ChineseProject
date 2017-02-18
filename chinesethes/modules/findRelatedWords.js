@@ -6,15 +6,23 @@ exports.findRelatedWords = function (words, phrase, cb) {
 	request("https://api.datamuse.com/words?ml=" + phrase, function (error, response, body) {
 		var regexp = /"word":"([a-z]*)/g;
 		var match = regexp.exec(body);
-		console.log(match);
-		var expressions = [];
+		var expressions = [phrase];
 		while (match != null) {
 			var word = match[1];
-			console.log("synonym: " + word);
 			expressions.push(word);
 			match = regexp.exec(body);
 		}
-		cb(expressions);
+		var relatedWords = [];
+		var i = 0, n = words.length;
+		for(; i < n; i++) {
+			words[i].relatesTo(expressions, function(relates) {
+				console.log("we ouch here");
+				if (relates) {
+					relatedWords.push(words[i]);
+				}
+			});
+		}
+		cb(relatedWords);
 	});
 	
 }
