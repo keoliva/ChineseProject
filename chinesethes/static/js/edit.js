@@ -25,8 +25,7 @@ $(function() {
 				['div input[name="chinese"]', 'div input[name="pinyin"]', 
 					'div input[name="partsOfSpeech"]', 'div textarea[name="english"]'], 
 				$(this).val());
-		}
-		
+		}	
 	});
 	
 	function wordInfo(word) {
@@ -61,7 +60,31 @@ $(function() {
 						'<span class="glyphicon glyphicon-remove" style="color:red;"></span></a></div></div></li>';
 		};
 	
-	// send a request to server
+	function getVocabularyFromImage(file) {
+		var formData = new FormData();
+		formData.append("file", file);
+		formData.append("language"   , "chs");
+		formData.append("apikey"  , "257815a0f588957");
+		formData.append("isOverlayRequired", true);
+		
+		sendRequest(
+			"POST", 
+			formData, 
+			"https://api.ocr.space/parse/image",
+			null,
+			uploadToOCRCallback
+		);
+	}
+	
+	// uploaded image gets sent to https://ocr.space/ocrapi
+	$('input[type=file]').on('change', function() {
+		var files = $(this)[0].files;
+		if (files) {
+			[].forEach.call(files, getVocabularyFromImage);
+		}	
+    });
+
+	// send a request to server to save the words
 	$('#save_btn').click(function() {
 		var $li = $('li.list-group-item');
 		var chinese, pinyin, partsOfSpeech, english;

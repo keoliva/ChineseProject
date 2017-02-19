@@ -24,5 +24,4 @@ exports.findRelatedWords = function (words, phrase, cb) {
 		}
 		cb(relatedWords);
 	});
-	
 }

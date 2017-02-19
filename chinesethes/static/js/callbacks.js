@@ -85,15 +85,13 @@ var filterWordsCallback = function(xhttp) {
 };
 
 function display_word(e) {
-	console.log(this);
-	console.log($(this).data('word'));
 	var word = $(this).data('word');
 	
 	var a = '<a href="http://www.iciba.com/' + word.chinese + 
 		'" target="_blank">Learn more about the word.</a>';
 	$('#word_info').html(a + '<br>' + word.chinese + ' (' + word.pinyin + 
 		') : <br>' + word.english);
-}
+};
 
 var getWordRecsCallback = function(xhttp) {
 	if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -110,4 +108,39 @@ var getWordRecsCallback = function(xhttp) {
 			$(this).on("click", display_word);
 		});
 	}
-}
+};
+
+var uploadToOCRCallback = function (xhttp) {
+	if (xhttp.readyState == 4 && xhttp.status == 200) {
+		var resp = JSON.parse(xhttp.responseText);
+		console.log("uploaded to OCR API!!!");
+		console.log(resp);
+		/**
+		success: function (ocrParsedResult) {
+			//Get the parsed results, exit code and error message and details
+			var parsedResults = ocrParsedResult["ParsedResults"];
+			var ocrExitCode = ocrParsedResult["OCRExitCode"];
+			var isErroredOnProcessing = ocrParsedResult["IsErroredOnProcessing"];
+			var errorMessage = ocrParsedResult["ErrorMessage"];
+			var errorDetails = ocrParsedResult["ErrorDetails"];
+			var processingTimeInMilliseconds = ocrParsedResult["ProcessingTimeInMilliseconds"];
+			//If we have got parsed results, then loop over the results to do something
+			if (parsedResults!= null) {
+				//Loop through the parsed results
+				$.each(parsedResults, function (index, value) {
+					var exitCode = value["FileParseExitCode"];
+					var parsedText = value["ParsedText"];
+					var errorMessage = value["ParsedTextFileName"];
+					var errorDetails = value["ErrorDetails"];
+
+					var textOverlay = value["TextOverlay"];
+					console.log(parsedText);
+					$.each(textOverlay["Lines"], function (index, value) {
+						//console.log(value);
+					});
+				});
+			}
+		}
+	});*/
+	}
+};
